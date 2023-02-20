@@ -15,10 +15,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
+using DevExpress.ExpressApp.Filtering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Employee_Manager.Module.BusinessObjects
 {
     [DefaultClassOptions]
+
+    [ObjectCaptionFormat("{0:FullName}")]
+    [DefaultProperty(nameof(FullName))]
     public class Employee : BaseObject
     {
         public Employee(Session session)
@@ -117,6 +122,49 @@ namespace Employee_Manager.Module.BusinessObjects
                 throw new NotImplementedException();
             }
         }
+
+        [SearchMemberOptions(SearchMemberMode.Exclude)]
+        public String FullName
+        {
+            get
+            {
+                return ObjectFormatter.Format(FullNameFormat, this, EmptyEntriesMode.RemoveDelimiterWhenEntryIsEmpty);
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public String DisplayName
+        {
+            get
+            {
+                return FullName;
+            }
+        }
+
+        public static String FullNameFormat = "{FirstName} {MiddleName} {LastName}";
+
+        [FieldSize(255)]
+        public String Email
+        {
+            get;
+            set;
+        }
+
+        [RuleRegularExpression(@"(((http|https) \://) [a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3} (:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;amp;%\$#\=~])*)|([a-zA-Z0-9.-]+\.[a-zA-Z] {2,6})", CustomMessageTemplate = @"Invalid ""Web Page Address"" .")]
+        public String WebPageAddress
+        {
+            get;
+            set;
+        }
+
+        [StringLength(4096)]
+        public String Notes
+        {
+            get;
+            set;
+        }
+
+
     }
 
     public enum TitleOfCourtesy
