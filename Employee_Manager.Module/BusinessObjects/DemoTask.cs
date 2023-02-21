@@ -25,11 +25,18 @@ namespace Employee_Manager.Module.BusinessObjects
             : base(session)
         {
         }
+        // in XPO we set the default value of the Priority property in the AfterConstruction method rather than in the Override method which is not supported by the XPO but the Entity Framework.
         public override void AfterConstruction()
         {
             base.AfterConstruction();
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
+            Priority = Priority.Normal;
         }
+
+        /*public override void OnCreated()
+        {
+            Priority = Priority.Normal;
+        }*/
 
 
         int percentCompleted;
@@ -105,6 +112,11 @@ namespace Employee_Manager.Module.BusinessObjects
                 }
             }
         }
+        public Priority Priority
+        {
+            get;
+            set;
+        }
 
         [Action(ImageName = "State_Task_Completed")]
         public void MarkCompleted()
@@ -141,4 +153,12 @@ namespace Employee_Manager.Module.BusinessObjects
         [ImageName("State_task_completed")]
         Completed
     }
+
+    public enum Priority
+    {
+        Low = 0,
+        Normal = 1,
+        High = 2
+    }
+
 }
