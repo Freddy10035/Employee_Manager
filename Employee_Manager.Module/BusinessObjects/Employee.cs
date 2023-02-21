@@ -162,7 +162,9 @@ namespace Employee_Manager.Module.BusinessObjects
             get;
             set;
         }
-
+        /**
+         * Big bug here!!
+         */
         [RuleRegularExpression(@"(((http|https) \://) [a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3} (:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;amp;%\$#\=~])*)|([a-zA-Z0-9.-]+\.[a-zA-Z] {2,6})", CustomMessageTemplate = @"Invalid ""Web Page Address"" .")]
         public String WebPageAddress
         {
