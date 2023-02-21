@@ -73,6 +73,12 @@ namespace Employee_Manager.Module.BusinessObjects
             set => SetPropertyValue(nameof(Birthday), ref birthday, value);
         }
 
+        public Address Address { get; set; }
+
+        //The Employee class now exposes the Position reference property.
+        //This way, you effectively create a “One-to-Many” relationship between these entity classes.
+        public Position Position { get; set; }
+
 
         //When you add a reference property of one entity type to another entity type, you establish the “One” part of the relationship between these entities.
         //In this case it is a relationship between the Department and Employee entity classes.
