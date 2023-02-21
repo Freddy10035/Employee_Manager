@@ -20,12 +20,22 @@ public class Updater : ModuleUpdater {
     }
     public override void UpdateDatabaseAfterUpdateSchema() {
         base.UpdateDatabaseAfterUpdateSchema();
-        //string name = "MyName";
-        //DomainObject1 theObject = ObjectSpace.FirstOrDefault<DomainObject1>(u => u.Name == name);
-        //if(theObject == null) {
-        //    theObject = ObjectSpace.CreateObject<DomainObject1>();
-        //    theObject.Name = name;
-        //}
+        Employee employeeMary = ObjectSpace.FirstOrDefault<Employee>(x => x.FirstName == "Mary" && x.LastName == "Tellitson");
+        if(employeeMary == null)
+        {
+            employeeMary = ObjectSpace.CreateObject<Employee>();
+            employeeMary.FirstName = "Mary";
+            employeeMary.LastName = "Tellitson";
+            //employeeMary.MiddleName = "Anne";
+            employeeMary.Email = "tellitson@example.com";
+            employeeMary.Birthday = new DateTime(1980, 11, 27);
+        }
+
+        ObjectSpace.CommitChanges();
+
+
+
+
 #if !RELEASE
         ApplicationUser sampleUser = ObjectSpace.FirstOrDefault<ApplicationUser>(u => u.UserName == "User");
         if(sampleUser == null) {

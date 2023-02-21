@@ -17,6 +17,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
 using DevExpress.ExpressApp.Filtering;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 
 namespace Employee_Manager.Module.BusinessObjects
 {
@@ -28,6 +29,8 @@ namespace Employee_Manager.Module.BusinessObjects
     {
         public Employee(Session session)
             : base(session) { }
+
+        public IList<DemoTask> DemoTasks { get; set; } = new ObservableCollection<DemoTask>();
 
         public override void AfterConstruction()
         {
