@@ -74,6 +74,11 @@ namespace Employee_Manager.Module.BusinessObjects
         }
 
 
+        //When you add a reference property of one entity type to another entity type, you establish the “One” part of the relationship between these entities.
+        //In this case it is a relationship between the Department and Employee entity classes.
+        public Department Department { get; set; }
+
+
         [Browsable(false)]
         public int TitleOfCourtesy_Int { get; set; }
 
@@ -84,7 +89,6 @@ namespace Employee_Manager.Module.BusinessObjects
 
         public class EmployeeManagerXpoDataStoreProvider : IXpoDataStoreProvider
         {
-            DateTime birthday;
         private readonly IDataStore dataStore;
 
             public EmployeeManagerXpoDataStoreProvider(IDataStore dataStore)
@@ -97,9 +101,9 @@ namespace Employee_Manager.Module.BusinessObjects
                 return dataStore;
             }
 
-            public DevExpress.Xpo.DB.AutoCreateOption AutoCreateOption => DevExpress.Xpo.DB.AutoCreateOption.SchemaAlreadyExists;
+            public AutoCreateOption AutoCreateOption => AutoCreateOption.SchemaAlreadyExists;
 
-            public DevExpress.Xpo.DB.IDataStore CreateUpdatingStore(bool allowUpdateSchema, out IDisposable[] disposableObjects)
+            public IDataStore CreateUpdatingStore(bool allowUpdateSchema, out IDisposable[] disposableObjects)
             {
                 disposableObjects = new IDisposable[] { (IDisposable)dataStore };
                 return dataStore;
@@ -114,7 +118,7 @@ namespace Employee_Manager.Module.BusinessObjects
                 return (IDisposable[])result;
             }
 
-            public DevExpress.Xpo.DB.IDataStore CreateSchemaCheckingStore(out IDisposable[] disposableObjects)
+            public IDataStore CreateSchemaCheckingStore(out IDisposable[] disposableObjects)
             {
                 disposableObjects = new IDisposable[] { (IDisposable)dataStore };
                 return dataStore;
