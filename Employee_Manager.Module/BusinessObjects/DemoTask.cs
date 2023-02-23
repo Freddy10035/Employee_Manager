@@ -46,7 +46,20 @@ namespace Employee_Manager.Module.BusinessObjects
             get;
             set;
         }
-*/
+        */
+
+        [Action(ToolTip = "Postpone the task to the next day", Caption = "Postpone")]
+
+        // Shifts the task due date to the next day.
+        public void Postpone()
+        {
+            if (DueDate == DateTime.MinValue)
+            {
+                DueDate= DateTime.Now;
+            }
+
+            DueDate = DueDate + TimeSpan.FromDays(1);
+        }
 
         int percentCompleted;
         DateTime startDate;
