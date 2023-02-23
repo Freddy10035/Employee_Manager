@@ -18,6 +18,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using DevExpress.ExpressApp.Filtering;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
+using System.Security.AccessControl;
 
 namespace Employee_Manager.Module.BusinessObjects
 {
@@ -32,12 +33,33 @@ namespace Employee_Manager.Module.BusinessObjects
 
         public IList<DemoTask> DemoTasks { get; set; } = new ObservableCollection<DemoTask>();
 
+        /*[DevExpress.Xpo.Association("Employee-DemoTask")]
+        public XPCollection<DemoTask> Tasks
+        {
+            get
+            {
+                return GetCollection<DemoTask>(nameof(DemoTasks));
+            }
+        }*/
+
+
+        /* Employee employee = ObjectSpace.GetObjectByKey<Employee>(employee);
+         DemoTask task = new DemoTask(Session);  
+
+         // add the task to the employee's list
+         employee.Employees.Add(task);
+
+         // save changes to both objects 
+         ObjectSpace.CommitChanges();*/
+
+
         public override void AfterConstruction()
         {
             base.AfterConstruction();
             // Place your initialization code here (https://documentation.devexpress.com/eXpressAppFramework/CustomDocument112834.aspx).
         }
 
+        private const string V = "{FirstName} {MiddleName} {LastName}";
         DateTime birthday;
         string middleName;
         string lastName;
@@ -73,6 +95,16 @@ namespace Employee_Manager.Module.BusinessObjects
             set => SetPropertyValue(nameof(Birthday), ref birthday, value);
         }
 
+
+
+        /**
+         * Big bug with the following code
+         *
+         * [DataSourceProperty("Department.Employees", DataSourcePropertyIsNullMode.SelectAll), DataSourceCriteria("Position.Title = 'Manager'")]
+            public Employee Manager { get; set; }
+        */
+
+
         public Address Address { get; set; }
 
         //The Employee class now exposes the Position reference property.
@@ -90,51 +122,6 @@ namespace Employee_Manager.Module.BusinessObjects
 
         [NotMapped]
         public TitleOfCourtesy TitleOfCourtesy { get; set; }
-
-
-
-        public class EmployeeManagerXpoDataStoreProvider : IXpoDataStoreProvider
-        {
-        private readonly IDataStore dataStore;
-
-            public EmployeeManagerXpoDataStoreProvider(IDataStore dataStore)
-            {
-                this.dataStore = dataStore;
-            }
-
-            public IDataStore GetDataStore(IDataStore dataStore)
-            {
-                return dataStore;
-            }
-
-            public AutoCreateOption AutoCreateOption => AutoCreateOption.SchemaAlreadyExists;
-
-            public IDataStore CreateUpdatingStore(bool allowUpdateSchema, out IDisposable[] disposableObjects)
-            {
-                disposableObjects = new IDisposable[] { (IDisposable)dataStore };
-                return dataStore;
-            }
-
-            public string ConnectionString => ((ISqlDataStore)dataStore).ToString();
-
-            public IDisposable[] CreateWorkingStore(out bool isReadonly)
-            {
-                var result = new[] { dataStore };
-                isReadonly = false;
-                return (IDisposable[])result;
-            }
-
-            public IDataStore CreateSchemaCheckingStore(out IDisposable[] disposableObjects)
-            {
-                disposableObjects = new IDisposable[] { (IDisposable)dataStore };
-                return dataStore;
-            }
-
-            public IDataStore CreateWorkingStore(out IDisposable[] disposableObjects)
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         [SearchMemberOptions(SearchMemberMode.Exclude)]
         public String FullName
@@ -154,7 +141,7 @@ namespace Employee_Manager.Module.BusinessObjects
             }
         }
 
-        public static String FullNameFormat = "{FirstName} {MiddleName} {LastName}";
+        public static String FullNameFormat = V;
 
         [FieldSize(255)]
         public String Email
@@ -165,7 +152,8 @@ namespace Employee_Manager.Module.BusinessObjects
         /**
          * Big bug here!!
          */
-        [RuleRegularExpression(@"(((http|https) \://) [a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3} (:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;amp;%\$#\=~])*)|([a-zA-Z0-9.-]+\.[a-zA-Z] {2,6})", CustomMessageTemplate = @"Invalid ""Web Page Address"" .")]
+
+        [RuleRegularExpression(@"(((http|https)\://)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;amp;%\$#\=~])*)|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})", CustomMessageTemplate = @"Invalid ""Web Page Address"".")]
         public String WebPageAddress
         {
             get;
@@ -191,26 +179,3 @@ namespace Employee_Manager.Module.BusinessObjects
         Ms
     }
 }
-
-
-/**
-  *This is C# code for a class called "Employee" which derives from the "BaseObject" class. It represents an employee in an employee management system.
-
-  *The class has a constructor that takes a "Session" object as an argument. The constructor calls the constructor of its base class ("BaseObject") and passes the "Session" object to it.
-
-  *The class also has an overridden "AfterConstruction" method which is called after an object of this class is created.This method is empty in this implementation.
-
-  *The class has three public properties: "FirstName", "LastName", and "MiddleName". Each property has a getter and a setter. 
-   The getter gets the current value of the property, and the setter sets a new value and updates the property value using the "SetPropertyValue" method.
-
-  *The class also has an inner class called "EmployeeManagerXpoDataStoreProvider" which implements the "IXpoDataStoreProvider" interface. 
-   This inner class is used to provide a data store for this application. 
-   It has several methods that implement the "IXpoDataStoreProvider" interface, including "CreateWorkingStore", "CreateUpdatingStore", "CreateSchemaCheckingStore", "GetDataStore", 
-   and "ConnectionString".
-   These methods provide different types of data stores for different purposes such as creating a schema checking store, creating a working store, creating an updating store, 
-   and getting a connection string.
-
-  *Finally, the "Employee" class has two attributes: "DefaultClassOptions" and "Persistent". 
-   "DefaultClassOptions" attribute specifies the default options for this class and "Persistent" attribute specifies the name of the persistent class in the database.
-
-  **/

@@ -39,6 +39,15 @@ namespace Employee_Manager.Module.BusinessObjects
         }*/
 
 
+        // private Employee _assignedTo;
+        /*[Association("Employee-DemoTask")]
+        public Employee AssignedTo
+        {
+            get;
+            set;
+        }
+*/
+
         int percentCompleted;
         DateTime startDate;
         DateTime dueDate;
@@ -131,12 +140,8 @@ namespace Employee_Manager.Module.BusinessObjects
             isLoaded = true;
         }
 
-        public IList<Employee> Employees
-        {
-            get;
-            set;
-
-        } = new ObservableCollection<Employee>();
+        public IList<Employee> Employees { get; set; } = new ObservableCollection<Employee>(); 
+    
     }
 
     
