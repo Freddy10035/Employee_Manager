@@ -60,11 +60,12 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Employee_ListView">
-      <Filters CurrentFilterId="Developers">
+    <ListView Id="Employee_ListView" Criteria="">
+      <Filters CurrentFilterId="All Employees">
         <Filter Id="All Employees" IsNewNode="True" />
-        <Filter Id="Developers" Criteria="[Position.Title] = 'Developers'" IsNewNode="True" />
-        <Filter Id="Development  Department Employees" Criteria="[Department.Title] = 'Development Department'" IsNewNode="True" />
+        <Filter Id="Developers" Criteria="[Position.Title] = 'Developer'" IsNewNode="True" />
+        <Filter Id="Development_Department" Criteria="[Department.Title] = 'Development'" Caption="Development" IsNewNode="True" />
+        <Filter Id="QA_position" Criteria="[Position.Title] = 'Quality Assurance'" Caption="Quality Assurance" IsNewNode="True" />
       </Filters>
     </ListView>
   </Views>
