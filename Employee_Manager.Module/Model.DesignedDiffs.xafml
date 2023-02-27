@@ -9,6 +9,7 @@
         <Member Name="StartDate" DisplayFormat="D" />
       </OwnMembers>
     </Class>
+    <Class Name="Employee_Manager.Module.BusinessObjects.Employee" ImageName="BO_Employee" />
   </BOModel>
   <NavigationItems>
     <Items>
