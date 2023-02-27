@@ -25,5 +25,40 @@
   </SchemaModules>
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <DetailView Id="Employee_DetailView">
+      <Items>
+        <PropertyEditor Id="Department.Office" PropertyName="Department.Office" IsNewNode="True" />
+        <PropertyEditor Id="Oid" Removed="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="32.552083333333336">
+            <LayoutGroup Id="Employee" RelativeSize="100">
+              <LayoutGroup Id="Employee_col1" RelativeSize="50">
+                <LayoutItem Id="FirstName" RelativeSize="16.50485436893204" />
+                <LayoutItem Id="LastName" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="MiddleName" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="Birthday" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="Address" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="Position" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="Department" RelativeSize="20.388349514563107" />
+              </LayoutGroup>
+              <LayoutGroup Id="Employee_col2" RelativeSize="50">
+                <LayoutItem Id="TitleOfCourtesy" RelativeSize="16.50485436893204" />
+                <LayoutItem Id="FullName" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="DisplayName" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="Email" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="WebPageAddress" RelativeSize="12.62135922330097" />
+                <LayoutItem Id="Notes" RelativeSize="16.50485436893204" />
+                <LayoutItem Id="Department.Office" ViewItem="Department.Office" Index="6" RelativeSize="16.50485436893204" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="DemoTasks_Group" Direction="Vertical" RelativeSize="67.44791666666667">
+            <LayoutItem Id="DemoTasks" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
   </Views>
 </Application>
