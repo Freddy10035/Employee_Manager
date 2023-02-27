@@ -60,7 +60,13 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Employee_ListView" Criteria="">
+    <ListView Id="Employee_ListView" Criteria="" IsGroupPanelVisible="True">
+      <Columns>
+        <ColumnInfo Id="FullName" SortOrder="Ascending" Width="193" />
+        <ColumnInfo Id="Position" SortOrder="Ascending" GroupIndex="1" />
+        <ColumnInfo Id="TitleOfCourtesy" Index="7" />
+        <ColumnInfo Id="Department" SortOrder="Ascending" GroupIndex="0" Index="8" />
+      </Columns>
       <Filters CurrentFilterId="All Employees">
         <Filter Id="All Employees" IsNewNode="True" />
         <Filter Id="Developers" Criteria="[Position.Title] = 'Developer'" IsNewNode="True" />
