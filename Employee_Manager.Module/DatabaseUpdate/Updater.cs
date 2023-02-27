@@ -47,13 +47,15 @@ public class Updater : ModuleUpdater {
             // The UserLoginInfo object requires a user object Id (Oid).
             // Commit the user object to the database before you create a UserLoginInfo object. This will correctly initialize the user key property.
             ObjectSpace.CommitChanges(); //This line persists created object(s).
-            ((ISecurityUserWithLoginInfo)sampleUser).CreateUserLoginInfo(SecurityDefaults.PasswordAuthentication, ObjectSpace.GetKeyValueAsString(sampleUser));
+            ((ISecurityUserWithLoginInfo)sampleUser).CreateUserLoginInfo(SecurityDefaults.PasswordAuthentication, 
+                ObjectSpace.GetKeyValueAsString(sampleUser));
         }
         PermissionPolicyRole defaultRole = CreateDefaultRole();
         sampleUser.Roles.Add(defaultRole);
 
         ApplicationUser userAdmin = ObjectSpace.FirstOrDefault<ApplicationUser>(u => u.UserName == "Admin");
-        if(userAdmin == null) {
+        if(userAdmin == null) 
+        {
             userAdmin = ObjectSpace.CreateObject<ApplicationUser>();
             userAdmin.UserName = "Admin";
             // Set a password if the standard authentication type is used
@@ -62,14 +64,19 @@ public class Updater : ModuleUpdater {
             // The UserLoginInfo object requires a user object Id (Oid).
             // Commit the user object to the database before you create a UserLoginInfo object. This will correctly initialize the user key property.
             ObjectSpace.CommitChanges(); //This line persists created object(s).
-            ((ISecurityUserWithLoginInfo)userAdmin).CreateUserLoginInfo(SecurityDefaults.PasswordAuthentication, ObjectSpace.GetKeyValueAsString(userAdmin));
+            ((ISecurityUserWithLoginInfo)userAdmin).CreateUserLoginInfo(SecurityDefaults.PasswordAuthentication, 
+                ObjectSpace.GetKeyValueAsString(userAdmin));
         }
 		// If a role with the Administrators name doesn't exist in the database, create this role
-        PermissionPolicyRole adminRole = ObjectSpace.FirstOrDefault<PermissionPolicyRole>(r => r.Name == "Administrators");
-        if(adminRole == null) {
+        PermissionPolicyRole adminRole = 
+            ObjectSpace.FirstOrDefault<PermissionPolicyRole>(r => r.Name == "Administrators");
+        if(adminRole == null) 
+        {
             adminRole = ObjectSpace.CreateObject<PermissionPolicyRole>();
             adminRole.Name = "Administrators";
         }
+
+        // Make the Administrators role an administrator role. 
         adminRole.IsAdministrative = true;
 		userAdmin.Roles.Add(adminRole);
         ObjectSpace.CommitChanges(); //This line persists created object(s).
