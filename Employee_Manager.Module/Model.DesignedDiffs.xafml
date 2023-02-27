@@ -2,6 +2,13 @@
 <Application Title="Employee_Manager">
   <BOModel>
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
+    <Class Name="Employee_Manager.Module.BusinessObjects.DemoTask">
+      <OwnMembers>
+        <Member Name="DueDate" DisplayFormat="D" />
+        <Member Name="PercentCompleted" DisplayFormat="{0:N0}%" />
+        <Member Name="StartDate" DisplayFormat="D" />
+      </OwnMembers>
+    </Class>
   </BOModel>
   <NavigationItems>
     <Items>
