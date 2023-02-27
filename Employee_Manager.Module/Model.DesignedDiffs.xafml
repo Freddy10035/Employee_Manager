@@ -60,5 +60,12 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="Employee_ListView">
+      <Filters CurrentFilterId="Developers">
+        <Filter Id="All Employees" IsNewNode="True" />
+        <Filter Id="Developers" Criteria="[Position.Title] = 'Developers'" IsNewNode="True" />
+        <Filter Id="Development  Department Employees" Criteria="[Department.Title] = 'Development Department'" IsNewNode="True" />
+      </Filters>
+    </ListView>
   </Views>
 </Application>
