@@ -7,7 +7,12 @@
     <Items>
       <Item Id="Default">
         <Items>
-          <Item Id="Note" ViewId="Note_ListView" Caption="Notes" IsNewNode="True" />
+          <Item Id="Employee_ListView" Caption="Employees" Index="0" />
+          <Item Id="Department_ListView" Caption="Departments" Index="1" />
+          <Item Id="Position_ListView" Caption="Positions" Index="2" />
+          <Item Id="DemoTask_ListView" Caption="Tasks" Index="3" />
+          <Item Id="Note" ViewId="Note_ListView" Caption="Notes" Index="4" IsNewNode="True" />
+          <Item Id="Payment_ListView" Caption="Payments" Index="5" />
         </Items>
       </Item>
     </Items>
