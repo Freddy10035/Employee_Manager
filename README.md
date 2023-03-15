@@ -40,9 +40,9 @@ The Payment Details form allows users to view and edit a payment's details, incl
 
 # Technologies Used
 
-- Backend: C#, ASP.NET, DevExpress XAF, DevExpress XPO ORM
-- Frontend: HTML, CSS, JavaScript, DevExpress ASP.NET Controls
-- Database: Microsoft SQL Server
+- <b>Backend:</b> C#, ASP.NET, DevExpress XAF, DevExpress XPO ORM
+- <b>Frontend:</b> HTML, CSS, JavaScript, DevExpress ASP.NET Controls
+- <b>Database:</b> Microsoft SQL Server
 
 # Installation
 
