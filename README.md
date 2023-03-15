@@ -50,7 +50,7 @@ The Payment Details form allows users to view and edit a payment's details, incl
 2. Open the solution file Employee Manager.sln in Visual Studio.
 3. Build the solution to restore NuGet packages and compile the application.
 4. Run the application using IIS Express or a web server of your choice.
-5. Access the application by navigating to http://localhost:8000 in your web browser.
+5. Access the application by navigating to http://localhost:44318 in your web browser.
 
 # Usage
 - Upon accessing the application, you will be prompted to log in using your username and password. which are "Admin","".
